@@ -12,17 +12,13 @@ public class ProgramaExtenso {
 			Scanner scnr = new Scanner(System.in);
 			System.out.printf("Informe um numero: ");
 			String valor = scnr.nextLine();
-			if(valor.replaceAll(" ", "").isEmpty()) {
-			}
-			else { 
-				try {
-					System.out.println(NumeroExtenso.transforma(valor));
-					scnr.close();
-					cond = false;
-				} catch (Exception e) { 
-					System.out.printf("Erro encontrado, não foram informados números.\n"); 
-				} 
-			} 
+			try {
+				System.out.println(NumeroExtenso.transforma(valor));
+				scnr.close();
+				cond = false;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}	
 		}
 	}
 }
