@@ -1,2 +1,2 @@
-Código do lab1
+Código do lab 1
 Linha 2 clone 2
