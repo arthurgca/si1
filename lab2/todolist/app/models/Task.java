@@ -20,6 +20,7 @@ public class Task extends Model {
   @Required(message="Campo obrigatório")
   public String description;
   @Required(message="Campo obrigatório")
+  @Min(value = 1, message = "Prioridade tem que ser maior ou igual a 1")
   public int priority;
   
   public boolean status = false;
