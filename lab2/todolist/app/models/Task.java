@@ -30,7 +30,7 @@ public class Task extends Model {
   );
   
   public static List<Task> all() {
-	  return find.all();
+	  return find.orderBy("priority asc").findList();
 	}
 
 	public static void create(Task task) {
@@ -45,9 +45,6 @@ public class Task extends Model {
 	  Task task = find.ref(id);
 	  task.status = true;
 	  task.update();
-	  
 	}
 
-	
-    
 }
