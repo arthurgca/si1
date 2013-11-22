@@ -9,7 +9,7 @@ libraryDependencies ++= Seq(
 )     
 
 val appDependencies = Seq(
-  javaJdbc
+  javaJdbc,
   javaEbean
 )
 
