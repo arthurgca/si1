@@ -3,35 +3,51 @@
 @import helper._
 
 @main("Lista de tarefas") {
-    
-    <h1>@tasks.size() Tarefa(s)</h1>
-    
-    <ul>
-        @for(task <- tasks) {
-            <li>
-                Nome: @task.label
-                - Projeto: @task.project
-                - Descrição: @task.description
-                - Prioridade: @task.priority
-                
-                @form(routes.Application.deleteTask(task.id)) {
-                    <input type="submit" value="Deletar">
-                }
-            </li>
-        }
-    </ul>
-    
-    <h2>Adicione nova tarefa</h2>
-    
-    @form(routes.Application.newTask()) {
-        
-        @inputText(taskForm("label"), '_label -> "Título:", '_showConstraints -> false)
-        @inputText(taskForm("project"), '_label -> "Projeto:", '_showConstraints -> false) 
-        @inputText(taskForm("description"), '_label -> "Descrição:", '_showConstraints -> false) 
-        @inputText(taskForm("priority"), '_label -> "Prioridade:", '_showConstraints -> false) 
-        
-        <input type="submit" value="Criar">
-        
-    }
-    
+
+	<h1>@tasks.size() Tarefa(s)</h1>
+
+
+	<h2>Tarefas feitas</h2>
+	<ul>
+	@for(task <- tasks) {
+		@if(task.status) {
+			<li>
+			Nome: @task.label - Projeto: @task.project - Descrição: @task.description - Prioridade: @task.priority
+			@form(routes.Application.deleteTask(task.id)) {
+				<input type="submit" value="Deletar">
+			}
+			</li> } 
+	} </ul>
+	<h2>Tarefas a fazer</h2>
+	<ul>
+	@for(task <- tasks) {
+		@if(!task.status) {
+			<li>
+			Nome: @task.label - Projeto: @task.project - Descrição: @task.description - Prioridade: @task.priority
+
+			@form(routes.Application.deleteTask(task.id)) {
+				<input type="submit" value="Deletar">
+			}
+			@form(routes.Application.setTaskDone(task.id)) {
+				<input type="submit" value="Marcar como feita">
+			} 
+			</li>        	 
+		}
+
+	}
+	</ul>
+
+	<h2>Adicione nova tarefa</h2>
+
+	@form(routes.Application.newTask()) {
+
+		@inputText(taskForm("label"), '_label -> "Título:", '_showConstraints -> false)
+		@inputText(taskForm("project"), '_label -> "Projeto:", '_showConstraints -> false) 
+		@inputText(taskForm("description"), '_label -> "Descrição:", '_showConstraints -> false) 
+		@inputText(taskForm("priority"), '_label -> "Prioridade:", '_showConstraints -> false) 
+
+		<input type="submit" value="Criar">
+
+	}
+
 }

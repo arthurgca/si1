@@ -21,6 +21,8 @@ public class Task extends Model {
   public String description;
   @Required(message="Campo obrigatório")
   public int priority;
+  
+  public boolean status = false;
 
   
   public static Finder<Long,Task> find = new Finder(
@@ -38,5 +40,14 @@ public class Task extends Model {
 	public static void delete(Long id) {
 	  find.ref(id).delete();
 	}
+
+	public static void setDone(Long id) {
+	  Task task = find.ref(id);
+	  task.status = true;
+	  task.update();
+	  
+	}
+
+	
     
 }
