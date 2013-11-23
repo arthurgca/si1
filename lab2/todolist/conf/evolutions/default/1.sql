@@ -7,7 +7,7 @@ create table task (
   id                        bigint not null,
   label                     varchar(255),
   project                   varchar(255),
-  description               varchar(255),
+  description               TEXT,
   priority                  integer,
   status                    boolean,
   constraint pk_task primary key (id))

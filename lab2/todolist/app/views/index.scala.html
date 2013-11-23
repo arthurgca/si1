@@ -4,50 +4,80 @@
 
 @main("Lista de tarefas") {
 
-	<h1>@tasks.size() Tarefa(s)</h1>
+<p class="text-stroke">@tasks.size() Tarefa(s)</p>
 
-
-	<h2>Tarefas feitas</h2>
-	<ul>
-	@for(task <- tasks) {
+<p class="text-stroke">Tarefas feitas</p>
+<table id="box-table-a" summary="Tarefas feitas">
+    <thead>
+    	<tr>
+        	<th scope="col">Nome</th>
+            <th scope="col">Projeto</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Prioridade</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+    	@for(task <- tasks) {
 		@if(task.status) {
-			<li>
-			Nome: @task.label - Projeto: @task.project - Descrição: @task.description - Prioridade: @task.priority
-			@form(routes.Application.deleteTask(task.id)) {
-				<input type="submit" value="Deletar">
-			}
-			</li>	
-		 } 
-	} </ul>
-	<h2>Tarefas a fazer</h2>
-	<ul>
-	@for(task <- tasks) {
-		@if(!task.status) {
-			<li>
-			Nome: @task.label - Projeto: @task.project - Descrição: @task.description - Prioridade: @task.priority
-
-			@form(routes.Application.deleteTask(task.id)) {
-				<input type="submit" value="Deletar">
-			}
-			@form(routes.Application.setTaskDone(task.id)) {
-				<input type="submit" value="Marcar como feita">
-			} 
-			</li>        	 
+    	<tr>
+			<td>@task.label</td>
+			<td>@task.project</td>
+			<td>@task.description</td>
+			<td>@task.priority</td>
+			<td>@form(routes.Application.deleteTask(task.id)) {
+				<input type="submit" class="button" value="Deletar"> } 
+			</td>
+		 }
 		}
+        </tr>
+        </tbody>
+  	</table>
+  	
+  	
+<p class="text-stroke">Tarefas a fazer</p>
+<table id="box-table-a" summary="Tarefas a fazer">
+    <thead>
+    	<tr>
+        	<th scope="col">Nome</th>
+            <th scope="col">Projeto</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Prioridade</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>		
+   		@for(task <- tasks) {
+		@if(!task.status) {
+    	<tr>
 
-	}
-	</ul>
+			<td>@task.label</td>
+			<td>@task.project</td>
+			<td>@task.description</td>
+			<td>@task.priority</td>
+			<td>@form(routes.Application.deleteTask(task.id)) {
+				<input type="submit" class="button" value="Deletar"> } 
+			</td>
+			<td>@form(routes.Application.setTaskDone(task.id)) {
+				<input type="submit" class="button" value="Marcar como feita"> } 
+			</td>
+			}
+		}
+        </tr>
+        </tbody>
+  	</table>
 
-	<h2>Adicione nova tarefa</h2>
+	<p class="text-stroke">Adicione nova tarefa</p>
 
-	@form(routes.Application.newTask()) {
-
+		<div class="input">
+		@form(routes.Application.newTask()) {
 		@inputText(taskForm("label"), '_label -> "Título:", '_showConstraints -> false)
 		@inputText(taskForm("project"), '_label -> "Projeto:", '_showConstraints -> false) 
 		@inputText(taskForm("description"), '_label -> "Descrição:", '_showConstraints -> false) 
 		@inputText(taskForm("priority"), '_label -> "Prioridade:", '_showConstraints -> false) 
-
-		<input type="submit" value="Criar">
+		<input type="submit" class="button" value="Criar" > 
+		</div>
 
 	}
 
