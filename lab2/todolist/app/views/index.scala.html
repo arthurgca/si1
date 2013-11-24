@@ -19,13 +19,13 @@
     </thead>
     <tbody>
     	@for(task <- tasks) {
-		@if(task.status) {
+		@if(task.isDone()) {
     	<tr>
-			<td>@task.label</td>
-			<td>@task.project</td>
-			<td>@task.description</td>
-			<td>@task.priority</td>
-			<td>@form(routes.Application.deleteTask(task.id)) {
+			<td>@task.getLabel()</td>
+			<td>@task.getProject()</td>
+			<td>@task.getDescription()</td>
+			<td>@task.getPriority()</td>
+			<td>@form(routes.Application.deleteTask(task.getId())) {
 				<input type="submit" class="button" value="Deletar"> } 
 			</td>
 		 }
@@ -49,17 +49,17 @@
     </thead>
     <tbody>		
    		@for(task <- tasks) {
-		@if(!task.status) {
+		@if(!task.isDone()) {
     	<tr>
 
-			<td>@task.label</td>
-			<td>@task.project</td>
-			<td>@task.description</td>
-			<td>@task.priority</td>
-			<td>@form(routes.Application.deleteTask(task.id)) {
+			<td>@task.getLabel()</td>
+			<td>@task.getProject()</td>
+			<td>@task.getDescription()</td>
+			<td>@task.getPriority()</td>
+			<td>@form(routes.Application.deleteTask(task.getId())) {
 				<input type="submit" class="button" value="Deletar"> } 
 			</td>
-			<td>@form(routes.Application.setTaskDone(task.id)) {
+			<td>@form(routes.Application.setTaskDone(task.getId())) {
 				<input type="submit" class="button" value="Marcar como feita"> } 
 			</td>
 			}
